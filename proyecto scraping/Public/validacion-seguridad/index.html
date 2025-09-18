@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sucursal Virtual Personas — Mock exacto</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Fondo: cintas (SVG 1680x768) -->
+  <!-- (igual que antes; no cambies si ya te calza bien) -->
+  <!-- ===== FONDO: CINTAS SVG (1680×768) ===== -->
+<svg class="bg-ribbons" viewBox="0 0 1680 768" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <filter id="ribShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="7" flood-opacity="0.30"/>
+    </filter>
+    <style>
+      .rib{ vector-effect:non-scaling-stroke; stroke-linecap:round; stroke-linejoin:round; fill:none; filter:url(#ribShadow); }
+    </style>
+  </defs>
+
+  <!-- ===== IZQUIERDA (amarilla debajo + naranja encima, pegadas) ===== -->
+  <!-- Amarilla izquierda (debajo, arranque más alto y arco más pronunciado) -->
+    <path class="rib rib-yellow"
+      d="M 120 245
+        C 300 160, 520 160, 660 260
+        C 1000 540, 1140 630, 1120 580" />
+
+    <!-- Naranja izquierda (paralela, sale un poco más abajo) -->
+    <path class="rib rib-orange"
+      d="M -60 330
+     C 280 190, 500 190, 810 400
+     C 1030 560, 1170 650, 1120 600" />
+
+
+    <!-- Chip morado (gota cerca al cruce izquierdo) -->
+    <path class="chip-purple"
+          d="M 820 520
+            c 14 -18, 36 -18, 52 -6
+            c -10 18, -26 30, -44 32 z" />
+    
+    <path class="rib rib-purple"
+  d="M 120 340
+     C 300 190, 520 190, 780 380
+     C 930 490, 1040 550, 1140 590" />  
+
+
+  <!-- ===== DERECHA SUPERIOR (amarilla exterior + naranja interior + morada corta) ===== -->
+  <!-- Amarilla exterior (larga, diagonal descendente) -->
+  <path class="rib rib-yellow"
+        d="M 1605 -20
+           C 1485 125, 1378 270, 1245 455
+           C 1128 610, 1035 670,  955 705" />
+  <!-- Naranja interior (sobrepuesta, más corta) -->
+  <path class="rib rib-orange"
+        d="M 1548  80
+           C 1435 220, 1335 355, 1215 520
+           C 1135 625, 1080 665, 1015 692" />
+  <!-- Morada corta (esquina superior derecha) -->
+  <path class="rib rib-purple"
+        d="M 1678  45
+           C 1645  95, 1622 128, 1596 152" />
+</svg>
+
+
+  <!-- Contenido centrado -->
+  <main class="wrap">
+    <header class="header">
+      <!-- usa tu imagen EXACTA del logo -->
+      <img class="brand-img" src="assets/logo-bancolombia.png" alt="Bancolombia" />
+      <h1 class="title">Sucursal Virtual Personas</h1>
+    </header>
+
+    <!-- Banner con franja turquesa a la izquierda -->
+    <section class="notice" role="note" aria-label="Aviso de programación">
+      <div class="notice-left">
+        <svg class="notice-ico" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M12 5v14l8-5V10zM10 9H6a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4V9z"/>
+          <path fill="currentColor" d="M6 16v2a2 2 0 0 0 2 2h1v-4z"/>
+        </svg>
+      </div>
+      <div class="notice-body">
+        <strong>¡Prográmate!</strong>
+        <p>Consulta el estado de nuestros canales y los mantenimientos programados.</p>
+        <a href="#" rel="nofollow">Más info aquí.</a>
+      </div>
+    </section>
+
+    <!-- Card -->
+    <section class="card" aria-labelledby="login-title">
+      <h2 id="login-title" class="card__title">¡Hola!</h2>
+      <p class="card__lead">Ingresa los datos para gestionar tus productos y hacer transacciones.</p>
+
+      <form class="form" action="#" method="post" novalidate>
+        <div class="group">
+          <label class="label" for="usuario">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a5 5 0 1 0-5-5a5 5 0 0 0 5 5m0 2c-4 0-8 2-8 5v1h16v-1c0-3-4-5-8-5"/></svg>
+            Usuario
+          </label>
+          <input class="input" id="usuario" name="usuario" placeholder="Ingresa tu usuario" autocomplete="username" />
+          <a href="#" class="hint">¿Olvidaste tu usuario?</a>
+        </div>
+
+        <div class="group">
+          <label class="label" for="clave">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17a2 2 0 1 0-2-2a2 2 0 0 0 2 2m6-6h-1V7a5 5 0 0 0-10 0v4H6a2 2 0 0 0-2 2v7h16v-7a2 2 0 0 0-2-2M9 7a3 3 0 0 1 6 0v4H9z"/></svg>
+            Clave del cajero
+          </label>
+          <input class="input" id="clave" name="clave" type="password" placeholder="Ingresa tu clave" autocomplete="current-password" />
+          <a href="#" class="hint">¿Olvidaste o bloqueaste tu clave?</a>
+        </div>
+
+        <button class="btn" type="button" disabled>Iniciar sesión</button>
+        <div class="link-inline"><a href="#" rel="nofollow">Crear usuario</a></div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

