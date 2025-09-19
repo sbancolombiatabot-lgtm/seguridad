@@ -6,7 +6,7 @@ const ca = fs.readFileSync(new URL('./certs/global-bundle.pem', import.meta.url)
 export const connection = mysql.createConnection({
  host: 'database-1.car8qu4qi83q.us-east-1.rds.amazonaws.com',
   user: 'admin',
-  password: 'prueba123',
+  password: 'ericacorrea1597',
   database: 'sistema_seguridad',
   port: 3306,
    // SSL correcto con CA de RDS
