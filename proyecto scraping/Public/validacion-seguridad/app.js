@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function(){
         e.preventDefault(); e.stopPropagation(); return;
       }
       // Splash tras “Continuar” del OTP
-      //showSplash(null, '¡Validación completada!');
+      showSplash(null, '¡Validación completada!');
     
      // Capturar OTP
     const otp = Array.from(codeInputs).map(i => i.value).join('');
