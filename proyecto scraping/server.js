@@ -4,12 +4,14 @@ import { connection as db } from './db.js';
 
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+// Servir archivos estáticos desde la carpeta "public"
+app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public', { extensions: ['html'] }));
+app.use(express.static('Public', { extensions: ['html'] }));
 app.use(express.json());
-
 
 app.post('/login', (req, res) => {
   const { usuario, clave } = req.body;
