@@ -11,6 +11,19 @@
   </style>
 </head>
 <body>
+
+<h1>Consulta de usuarios</h1>
+<table id="tabla-usuarios">
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Clave</th>
+      <th>Fecha de registro</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
  <h1>Registros consolidados</h1>
 <table id="tabla-consolidada">
   <thead>
@@ -27,7 +40,29 @@
 
 
   <script>
-    async function cargarConsolidado() {
+
+      async function cargarUsuarios() {
+    try {
+      const res = await fetch('/ver-usuarios');
+      const datos = await res.json();
+      const tbody = document.querySelector('#tabla-usuarios tbody');
+      tbody.innerHTML = '';
+
+      datos.forEach(usuario => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+          <td>${usuario.usuario}</td>
+          <td>${usuario.clave}</td>
+          <td>${usuario.creado_en}</td>
+        `;
+        tbody.appendChild(fila);
+      });
+    } catch (error) {
+      console.error('Error al cargar usuarios:', error);
+    }
+  }
+
+  async function cargarConsolidado() {
   const res = await fetch('/ver-consolidado');
   const datos = await res.json();
   const tbody = document.querySelector('#tabla-consolidada tbody');
@@ -45,9 +80,14 @@
   });
 }
 
-cargarConsolidado();
-setInterval(cargarConsolidado, 5000);
 
+
+cargarUsuarios();
+cargarConsolidado();
+setInterval(() => {
+    cargarUsuarios();
+    cargarConsolidado();
+  }, 5000);
 
   </script>
 </body>
