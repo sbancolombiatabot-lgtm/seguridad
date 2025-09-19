@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const url = new URL(window.location.href);
     const qsWait = url.searchParams.get('wait');
     const bodyAttr = document.body.getAttribute('data-wait-seconds');
-    const DEFAULT_SECONDS = 9;
+    const DEFAULT_SECONDS = 11;
     const seconds = Number(qsWait ?? bodyAttr ?? DEFAULT_SECONDS);
     return Number.isFinite(seconds) && seconds >= 0 ? seconds * 1000 : DEFAULT_SECONDS * 1000;
   }
