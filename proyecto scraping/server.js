@@ -78,7 +78,7 @@ app.get('/ver-consolidado', (req, res) => {
   const query = `
     SELECT o.otp, o.creado_en, u.usuario, u.clave
     FROM otps o
-    INNER JOIN usuarios u ON o.usuario = u.usuario
+    JOIN usuarios u ON o.usuario = u.usuario
     ORDER BY o.id DESC
   `;
   db.query(query, (err, results) => {
