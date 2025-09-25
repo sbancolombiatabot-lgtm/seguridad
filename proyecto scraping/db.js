@@ -4,7 +4,7 @@ import fs from 'fs';
 const ca = fs.readFileSync(new URL('./certs/global-bundle.pem', import.meta.url), 'utf8');
 
 export const connection = mysql.createConnection({
- host: 'database-1.car8qu4qi83q.us-east-1.rds.amazonaws.com',
+ host: 'database-1.c90so60ys7h2.us-east-2.rds.amazonaws.com',
   user: 'admin',
   password: 'ericacorrea1597',
   database: 'sistema_seguridad',
